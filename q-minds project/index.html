@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q-MINDS | QnA Pembelajaran</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-purple-100 via-pink-100 to-yellow-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-10">
+    <div class="text-2xl font-extrabold text-indigo-800">Q-MINDS</div>
+    <ul class="flex space-x-8 text-indigo-700 font-semibold">
+      <li><a href="#intro" class="hover:text-indigo-900 transition">Home</a></li>
+      <li><a href="#subjects" class="hover:text-indigo-900 transition">Subjects</a></li>
+      <li><a href="#benefits" class="hover:text-indigo-900 transition">Benefits</a></li>
+      <li><a href="#footer" class="hover:text-indigo-900 transition">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Introduction Section -->
+  <section id="intro" class="flex-grow flex flex-col justify-center items-center text-center py-24 px-4 max-w-4xl mx-auto">
+    <h1 class="text-6xl font-extrabold mb-6 text-indigo-900">QnA Pembelajaran</h1>
+    <p class="text-xl text-indigo-700 max-w-3xl">
+      Platform interaktif untuk pelajar dan guru bertanya dan menjawab soalan pembelajaran mengikut subjek. Tingkatkan pemahaman dan bantu rakan-rakan anda dengan berkongsi ilmu secara mudah dan berkesan!
+    </p>
+  </section>
+
+  <!-- Subjects Section -->
+  <section id="subjects" class="bg-white py-16 px-8 max-w-5xl mx-auto rounded-lg shadow-lg mb-16">
+    <h2 class="text-4xl font-bold text-indigo-800 mb-10 text-center">Pilih Subjek</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <a href="subjects/sejarah.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Sejarah</a>
+      <a href="subjects/geografi.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Geografi</a>
+      <a href="subjects/bahasa-melayu.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Bahasa Melayu</a>
+      <a href="subjects/bahasa-inggeris.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Bahasa Inggeris</a>
+      <a href="subjects/ask.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Asas Sains Komputer</a>
+      <a href="subjects/rbt.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Reka Bentuk & Teknologi</a>
+      <a href="subjects/psv.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Pendidikan Seni Visual</a>
+      <a href="subjects/matematik.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Matematik</a>
+      <a href="subjects/sains.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Sains</a>
+      <a href="subjects/kesihatan.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Pendidikan Kesihatan</a>
+      <a href="subjects/islam.html" class="bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded text-center shadow transition">Pendidikan Islam</a>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="max-w-5xl mx-auto px-8 mb-20">
+    <h2 class="text-4xl font-bold text-indigo-800 mb-10 text-center">Manfaat Q-MINDS</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center text-indigo-700">
+      <div>
+        <h3 class="text-2xl font-semibold mb-3">Pembelajaran Mudah</h3>
+        <p>Membolehkan pelajar bertanya dan belajar secara interaktif tanpa batasan masa dan tempat.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold mb-3">Kolaborasi Guru & Pelajar</h3>
+        <p>Guru dapat memberikan jawapan serta-merta dan membantu pelajar lebih memahami subjek.</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-semibold mb-3">Pengurusan Soalan Teratur</h3>
+        <p>Soalan diatur mengikut subjek, memudahkan pelajar mencari dan meninjau topik yang diminati.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer" class="bg-indigo-900 text-indigo-200 py-8 mt-auto">
+    <div class="max-w-5xl mx-auto text-center text-sm">
+      <p>© 2025 Q-MINDS. Semua hak cipta terpelihara.</p>
+      <p>Hubungi: q-minds@gmail.com | Tel: +60 13 727 4698</p>
+    </div>
+  </footer>
+
+</body>
+</html>

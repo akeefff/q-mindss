@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Q&A Matematik | Q-MINDS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-200 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-10">
+    <div class="text-2xl font-extrabold text-indigo-800">Q-MINDS</div>
+    <ul class="flex space-x-6 text-indigo-700 font-semibold">
+      <li><a href="../index.html" class="hover:text-indigo-900 transition">Home</a></li>
+      <li class="text-indigo-900 font-bold">Matematik</li>
+    </ul>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-4xl font-extrabold text-indigo-900 mb-10 text-center">Q&A Matematik</h1>
+
+    <!-- Student Question Form -->
+    <section class="bg-white p-6 rounded shadow mb-10">
+      <h2 class="text-xl font-bold text-indigo-800 mb-4">Hantar Soalan (Untuk Murid)</h2>
+      <form id="questionForm" class="flex flex-col space-y-4">
+        <textarea id="studentQuestion" rows="3" class="p-3 border border-indigo-300 rounded resize-none" placeholder="Tulis soalan anda di sini..." required></textarea>
+        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded w-fit">Hantar Soalan</button>
+      </form>
+    </section>
+
+    <!-- Q&A Section -->
+    <section id="qnaSection" class="space-y-10"></section>
+  </main>
+
+  <!-- Firebase + Logic -->
+  <script type="module">
+    // Firebase config anda (GANTIKAN dengan config projek anda)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, onSnapshot, updateDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBBZOEOkNRPnNCjBkc3t5RIVQReh10a96Q",
+      authDomain: "qna-pembelajaran.firebaseapp.com",
+      projectId: "qna-pembelajaran",
+      storageBucket: "qna-pembelajaran.firebasestorage.app",
+      messagingSenderId: "188973400798",
+      appId: "1:188973400798:web:bc11046ab0647e6c3c384f",
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const qnaCollection = collection(db, "matematikQnA");
+
+    const qnaSection = document.getElementById("qnaSection");
+    const form = document.getElementById("questionForm");
+    const input = document.getElementById("studentQuestion");
+
+    // Submit Question
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const text = input.value.trim();
+      if (!text) return;
+      await addDoc(qnaCollection, {
+        question: text,
+        answer: "",
+        answered: false,
+        timestamp: new Date()
+      });
+      input.value = "";
+    });
+
+    // Load Questions
+    function renderQnA(data) {
+      qnaSection.innerHTML = "";
+      data.forEach((docSnap) => {
+        const item = docSnap.data();
+        const id = docSnap.id;
+
+        const container = document.createElement("div");
+        container.className = "bg-white p-6 rounded shadow";
+
+        const q = document.createElement("p");
+        q.className = "text-indigo-900 font-semibold mb-3";
+        q.textContent = "Soalan: " + item.question;
+        container.appendChild(q);
+
+        if (item.answered) {
+          const a = document.createElement("p");
+          a.className = "bg-indigo-100 text-indigo-900 p-4 rounded whitespace-pre-wrap mt-2";
+          a.textContent = "Jawapan: " + item.answer;
+          container.appendChild(a);
+        } else {
+          const answerForm = document.createElement("form");
+          answerForm.className = "mt-3 flex flex-col";
+
+          const textarea = document.createElement("textarea");
+          textarea.rows = 3;
+          textarea.className = "p-3 border border-indigo-300 rounded mb-3 resize-none";
+          textarea.placeholder = "Jawapan (untuk guru)...";
+
+          const btn = document.createElement("button");
+          btn.type = "submit";
+          btn.className = "bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded w-fit";
+          btn.textContent = "Hantar Jawapan";
+
+          answerForm.appendChild(textarea);
+          answerForm.appendChild(btn);
+
+          answerForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const answer = textarea.value.trim();
+            if (!answer) return;
+            await updateDoc(doc(db, "matematikQnA", id), {
+              answer: answer,
+              answered: true,
+            });
+          });
+
+          container.appendChild(answerForm);
+        }
+
+        qnaSection.appendChild(container);
+      });
+    }
+
+    // Real-time listener
+    onSnapshot(qnaCollection, (snapshot) => {
+      renderQnA(snapshot.docs);
+    });
+  </script>
+
+</body>
+</html>
